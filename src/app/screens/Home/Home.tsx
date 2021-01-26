@@ -1,4 +1,5 @@
 import { FC } from "react";
+import { Link } from "react-router-dom";
 import homeImg from "../../assets/img/home.png";
 
 interface Props {}
@@ -11,9 +12,9 @@ const Home: FC<Props> = () => {
           <h2 className="home__subtitle">
             Try the best food of <br /> the week.
           </h2>
-          <a href="/" className="button">
+          <Link to="/menu" className="button">
             View Menu
-          </a>
+          </Link>
         </div>
 
         <img src={homeImg} alt="food plate" className="home__img" />

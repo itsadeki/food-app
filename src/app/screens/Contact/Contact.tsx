@@ -15,7 +15,11 @@ const Contact: FC<Props> = () => {
         </div>
 
         <div className="contact__button">
-          <a href="/" className="button">
+          <a
+            href='mailto:itsadeki@gmail.com?subject="commande La Fabrique"'
+            target="__blank"
+            className="button"
+          >
             Contact us now
           </a>
         </div>

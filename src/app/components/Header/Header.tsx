@@ -29,6 +29,9 @@ const Header: FC<Props> = () => {
 
   useEffect(() => {
     window.addEventListener("scroll", scrollActive);
+  }, []);
+
+  useEffect(() => {
     if (theme === "dark") {
       document.body.classList.add("dark-theme");
       refThemeBtn.current?.classList.add("bx-sun");
@@ -36,9 +39,7 @@ const Header: FC<Props> = () => {
       document.body.classList.remove("dark-theme");
       refThemeBtn.current?.classList.remove("bx-sun");
     }
-  }, []);
 
-  useEffect(() => {
     localStorage.setItem("theme", theme);
   }, [theme]);
 

@@ -324,6 +324,7 @@ img {
   height: 64px;
   fill: var(--first-color);
   margin-bottom: var(--mb-2);
+  color: var(--first-color);
 }
 
 .services__title {
