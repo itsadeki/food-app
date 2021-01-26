@@ -8,11 +8,14 @@ import About from "./screens/About";
 import Services from "./screens/Services";
 import Menu from "./screens/Menu";
 import Contact from "./screens/Contact";
+import ReactNotification from "react-notifications-component";
+import "react-notifications-component/dist/theme.css";
 
 interface Props {}
 const App: FC<Props> = () => {
   return (
     <Router>
+      <ReactNotification />
       <Header />
       <main className="l-main">
         <Route path="/" exact>
