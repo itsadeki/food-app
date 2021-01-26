@@ -4,8 +4,10 @@ import { Link } from "react-router-dom";
 interface Props {}
 const Header: FC<Props> = () => {
   const [active, setActive] = useState(0);
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
   const refHeader = useRef<HTMLElement | null>(null);
   const refMenu = useRef<HTMLDivElement | null>(null);
+  const refThemeBtn = useRef<HTMLElement | null>(null);
 
   const getActiveClassName = (idActive: number) => {
     refMenu.current?.classList.remove("show-menu");
@@ -16,7 +18,7 @@ const Header: FC<Props> = () => {
   };
 
   const scrollActive = () => {
-    if (window.scrollY > 200) {
+    if (window.scrollY > 60) {
       refHeader.current?.classList.add("scroll-header");
     } else {
       refHeader.current?.classList.remove("scroll-header");
@@ -27,7 +29,18 @@ const Header: FC<Props> = () => {
 
   useEffect(() => {
     window.addEventListener("scroll", scrollActive);
+    if (theme === "dark") {
+      document.body.classList.add("dark-theme");
+      refThemeBtn.current?.classList.add("bx-sun");
+    } else {
+      document.body.classList.remove("dark-theme");
+      refThemeBtn.current?.classList.remove("bx-sun");
+    }
   }, []);
+
+  useEffect(() => {
+    localStorage.setItem("theme", theme);
+  }, [theme]);
 
   return (
     <header className="l-header" id="header" ref={refHeader}>
@@ -85,7 +98,18 @@ const Header: FC<Props> = () => {
             </li>
 
             <li>
-              <i className="bx bx-moon change-theme" id="theme-button"></i>
+              <i
+                className="bx bx-moon change-theme"
+                ref={refThemeBtn}
+                id="theme-button"
+                onClick={() => {
+                  document.body.classList.toggle("dark-theme");
+                  refThemeBtn.current?.classList.toggle("bx-sun");
+                  setTheme((current) =>
+                    current === "dark" ? "light" : "dark"
+                  );
+                }}
+              ></i>
             </li>
           </ul>
         </div>
@@ -93,7 +117,9 @@ const Header: FC<Props> = () => {
         <div className="nav__toggle" id="nav-toggle">
           <i
             className="bx bx-menu"
-            onClick={() => refMenu.current?.classList.toggle("show-menu")}
+            onClick={() => {
+              refMenu.current?.classList.toggle("show-menu");
+            }}
           ></i>
         </div>
       </nav>
